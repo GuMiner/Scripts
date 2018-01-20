@@ -13,6 +13,11 @@ Finds duplicate files from one directory in another directory structure.
 
 Effectively, this is the inverse of the **Verify-TransientFilesAreSaved** script.
 
+### Rename-FileExtensions (PowerShell)
+Bulk renames file extensions in a directory.
+
+This is useful to perform bulk case conversions (.PNG to .png, .MP3 to .mp3, etc) for operating-system invariant file storage.
+
 ### BulkConvertToMp4 (Batch)
 Converts a series of files to MP4
 
