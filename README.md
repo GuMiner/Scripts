@@ -8,6 +8,11 @@ Verifies that files in a directory are backed up in another directory structure.
 
 This is useful when burning media CDs, to ensure that files copied to the burn disk aren't inadvertently deleted from persistent storage.
 
+### Find-DuplicateFiles (PowerShell)
+Finds duplicate files from one directory in another directory structure.
+
+Effectively, this is the inverse of the **Verify-TransientFilesAreSaved** script.
+
 ### BulkConvertToMp4 (Batch)
 Converts a series of files to MP4
 
