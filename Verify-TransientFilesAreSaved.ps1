@@ -16,7 +16,7 @@ param(
     [switch]
     $OnlyCompareFileNames)
 
-$transientFiles = Get-ChildItem $TransientDirectory
+$transientFiles = Get-ChildItem $TransientDirectory -Recurse
 $persistentFiles = Get-ChildItem $PersistentDirectory -Recurse
 
 $foundCount = 0
