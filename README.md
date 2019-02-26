@@ -18,13 +18,6 @@ Bulk renames file extensions in a directory.
 
 This is useful to perform bulk case conversions (.PNG to .png, .MP3 to .mp3, etc) for operating-system invariant file storage.
 
-### ConvertTo-GrayscaleImage (PowerShell)
-Converts a RGB PNG image representing a 16-bit heightmap (R: LSB. G: MSB, B: Unused) to a 8-bit normalized greyscale image.
-
-This is useful to convert my custom heightmap files into a format that other programs can use to generate STL files for 3d printing, resulting in really cool terrain maps:
-![Terrain Map of Mt. Si](./heightmap.jpg "Terrain Map of Mt. Si")
-
-
 ### BulkConvertToMp4 (Batch)
 Converts a series of files to MP4
 
