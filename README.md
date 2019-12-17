@@ -32,3 +32,7 @@ This is useful to reduce the file size of inadequately-compressed videos and to 
 Converts a series of numbered PNG files to a 30 FPS MP4 video
 
 This is useful when making a video from [POV-Ray](http://povray.org/) still renders.
+
+## Other
+### FFmpeg Snippets
+Useful snippets for using FFmpeg

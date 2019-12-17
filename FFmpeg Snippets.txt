@@ -1,0 +1,33 @@
+Useful FFMpeg snippets from here and there
+------------------------------------------
+
+# Nicely convert 5.1 surround sound to stereo
+ffmpeg -i ... -ac 2 -af "pan=stereo|FL=FC+0.30*FL+0.30*BL|FR=FC+0.30*FR+0.30*BR" -preset faster output.mp4
+
+# Extract raw 5.1 surround stereo from a video
+ffmpeg -i ... -vn -b:a 384k output.ogg
+
+# (batch) Bulk convert AVI / MOV files that get compressed down too much with default settings
+FOR /f %%a IN ('dir /b *.AVI') DO CALL ffmpeg -i %%a -b:a 48k -b:v 20000k -pix_fmt yuv420p %%~na.mp4
+FOR /f %%a IN ('dir /b *.MOV') DO CALL ffmpeg -i %%a -b:a 48k -b:v 20000k %%~na.mpeg
+
+# (powershell) Bulk convert AVI files using default MP4 settings
+$dir = "..."
+$outputDir = "..."
+foreach ($file in [IO.Directory]::GetFiles($dir))
+{
+    $fileRoot = [IO.Path]::GetFileNameWithoutExtension($file)
+    if ($file.EndsWith(".AVI"))
+    {
+        & .\ffmpeg.exe -i "$file" "$outputDir\$($fileRoot).mp4"
+    }
+}
+
+# Compare videos after FFmpeg compression for differences
+.\ffmpeg.exe -i "original.mov" -i "converted.mp4" -filter_complex "blend=all_mode=difference" -c:v libx264 -crf 18 -c:a copy difference_output.mkv
+
+# Cut a video from timestamp <start> for <duration>
+.\ffmpeg.exe -ss <start> -i <input> -to <end> -c copy <output>
+
+## Example: Cut the video so it starts 30 seconds later and run to the end, reconverting it as well.
+\ffmpeg.exe -ss 00:00:30 -i "input.mp4" -c copy output.mp4
