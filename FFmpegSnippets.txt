@@ -32,7 +32,10 @@ foreach ($file in [IO.Directory]::GetFiles($dir))
 ## Example: Cut the video so it starts 30 seconds later and run to the end, reconverting it as well.
 \ffmpeg.exe -ss 00:00:30 -i "input.mp4" -c copy output.mp4
 
-# Crop a video and slow it down to a 10th the speed (dropping frames and audio)
+# Crop a video and slow it down to a 10th the speed (dropping frames and audio if framerate not > 30fps)
+## Use '-r 29' to set the framerate appropriately.
+## Use 10 to speed it up 10x
+## Use -filter:a "atempo=2.0,atempo=2.0" to quadruple audio. You can only do 0.5 to 2x audio speedup / slowdown
 ffmpeg -i "input.mp4" -filter:v "crop=680:in_h:390:0, setpts=0.10*PTS" -an "output.mp4"
 
 # Change brightness/contrast/saturation points
