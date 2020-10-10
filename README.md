@@ -7,7 +7,6 @@ Some of the scripts require external tools. You can find them from these links.
 * [HandBrakeCLI](https://handbrake.fr/downloads2.php)
 * [jpeg-archive](https://github.com/danielgtaylor/jpeg-archive/releases)
 * [Python 3.7+](https://www.python.org/downloads/)
-Several scripts are 
 
 ## File Management
 
