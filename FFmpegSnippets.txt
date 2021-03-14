@@ -41,3 +41,6 @@ ffmpeg -i "input.mp4" -filter:v "crop=680:in_h:390:0, setpts=0.10*PTS" -an "outp
 # Change brightness/contrast/saturation points
 ## Also change the red/blue center points in the color curve
 ffmpeg -i "input.mp4" -vf "eq=brightness=0:contrast=1:saturation=1,curves=red='0/0 0.5/0.58 1/1',curves=blue='0/0 0.5/0.4 1/1'" "output.mp4" 
+
+# Combine images into a 29 FPS video
+ffmpeg -start_number 4701 -i DSC0%d.JPG -r 30 -s 1920x1080 out.mp4
