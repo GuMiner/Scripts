@@ -12,11 +12,13 @@ The path to 'jpeg-recompress.exe' to run to recompress files.
 .PARAMETER ImageMagickPath
 The path to 'magick.exe' to convert HEIC files to JPG files.
 #>
-$Folder = "C:\Users\Gustave\Desktop\2021 Enumclaw Day"
+$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2021\10"
 
-$JpegRecompressPath = "C:\Users\Gustave\Desktop\Programs\jpeg-archive\jpeg-recompress.exe"
+$JpegRecompressPath = "C:\Users\gusgr\Desktop\Programs\jpeg-archive\jpeg-recompress.exe"
 
-$ImageMagickPath = "C:\Users\Gustave\Desktop\Programs\ImageMagick\magick.exe"
+$ImageMagickPath = "C:\Users\gusgr\Desktop\Programs\ImageMagick\magick.exe"
+
+$DeleteHeicFile = $true
 
 foreach ($file in [IO.Directory]::GetFiles($Folder))
 {
@@ -31,6 +33,10 @@ foreach ($file in [IO.Directory]::GetFiles($Folder))
 
         Write-Output "Converting $file ..."
         & $ImageMagickPath convert $file $jpgFilename
+
+        if ($DeleteHeicFile) {
+            [IO.File]::Delete($file)
+        }
 
         Write-Output "Processing $jpgFilename ..."
         & $JpegRecompressPath -q high $jpgFilename $jpgFilename

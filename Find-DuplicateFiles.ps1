@@ -14,6 +14,7 @@ param(
 
 $sourceFiles = Get-ChildItem $SourceDirectory
 $potentialDuplicateFiles = Get-ChildItem $PotentialDuplicateDirectory -Recurse
+$OnlyCompareFileNames = $true
 
 foreach ($file in $sourceFiles)
 {
@@ -21,7 +22,7 @@ foreach ($file in $sourceFiles)
     {
         if ($potentialDuplicateFile.Name -eq $file.Name)
         {
-            if ($potentialDuplicateFile.Length -eq $file.Length -or $OnlyCompareFileNames)
+            if ($true)
             {
                 Write-Output "Found file $($potentialDuplicateFile.Name) in $($potentialDuplicateFile.DirectoryName) as a duplicate"
             }

@@ -1,2 +1,2 @@
-C:\Python37\python.exe %0\..\scripts\HEVC-to-MP4.py %*
+C:\ml\python-3.8\python.exe %0\..\scripts\HEVC-to-MP4.py %*
 pause

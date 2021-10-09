@@ -11,7 +11,7 @@ if len(sys.argv) < 2:
 
 slowdown = 8
 
-cmd = 'C:\\users\\Gustave\\Desktop\\Programs\\HandbrakeCLI\\HandbrakeCLI.exe'
+cmd = 'C:\\users\\gusgr\\Desktop\\Programs\\HandbrakeCLI\\HandbrakeCLI.exe'
 input = sys.argv[1]
 output = f'{os.path.splitext(input)[0]}.mp4'
 
