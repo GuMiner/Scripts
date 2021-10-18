@@ -1,16 +1,19 @@
 ﻿<#
 .DESCRIPTION
-Runs jpeg-recompress (https://github.com/danielgtaylor/jpeg-archive) on a folder of JPEG files.
-Converts HEIC files to JPG too, as that saves ~1 MB per file.
+Automates the drag-and-drop HEVC-to-MP4 and 240-to-29fps conversion scripting.
+The process will run on all landscape (and 240 fps) files only in the specified $Folder
 
 .PARAMETER Folder
 The folder with files to process
 
-.PARAMETER JpegRecompressPath
-The path to 'jpeg-recompress.exe' to run to recompress files.
+.PARAMETER ExifToolPath
+The path to 'exiftool.exe' to get video FPS and size.
 
-.PARAMETER ImageMagickPath
-The path to 'magick.exe' to convert HEIC files to JPG files.
+.PARAMETER SlowMotionConversionPath
+The folder with the drag-and-drop slow motion scripting.
+
+.PARAMETER DeleteMovFile
+Whether to default the *.MOV HEVC file (and 240 FPS MP4 file) after conversion. Defaults to $true.
 #>
 $Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2021\09"
 

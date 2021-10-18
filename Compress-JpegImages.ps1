@@ -12,7 +12,7 @@ The path to 'jpeg-recompress.exe' to run to recompress files.
 .PARAMETER ImageMagickPath
 The path to 'magick.exe' to convert HEIC files to JPG files.
 #>
-$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2021\10"
+$Folder = "C:\Users\gusgr\Downloads\Official"
 
 $JpegRecompressPath = "C:\Users\gusgr\Desktop\Programs\jpeg-archive\jpeg-recompress.exe"
 
