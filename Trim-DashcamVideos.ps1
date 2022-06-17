@@ -6,10 +6,10 @@ Splits and re-encodes MP4 videos (yuv240p) based on the specified parameters
 The file to process
 
 .PARAMETER Start
-The start (in seconds)
+The start (in seconds or minute.seconds or minute:seconds format)
 
 .PARAMETER End
-The end time (in seconds)
+The end time (in seconds or minute.seconds or minute:seconds format)
 
 .PARAMETER FFmpegPath
 The path to ffmpeg

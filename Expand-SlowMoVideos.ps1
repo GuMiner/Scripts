@@ -15,7 +15,7 @@ The folder with the drag-and-drop slow motion scripting.
 .PARAMETER DeleteMovFile
 Whether to default the *.MOV HEVC file (and 240 FPS MP4 file) after conversion. Defaults to $true.
 #>
-$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2021\08"
+$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2022\05"
 
 $ExifToolPath = "C:\Users\gusgr\Desktop\Programs\exiftool\exiftool.exe"
 
@@ -32,7 +32,7 @@ foreach ($file in [IO.Directory]::GetFiles($Folder))
 
         $frameRate = [float]::Parse($($fileData | Select-String -Pattern "Video Frame Rate").ToString().Split(':')[1].Trim())
         $imageWidth = [int]::Parse($($fileData | Select-String -Pattern "Source Image Width").ToString().Split(':')[1].Trim())
-        if ($frameRate -ge 240 -and $imageWidth -eq 1920) {
+        if ($frameRate -ge 200 -and $imageWidth -eq 1920) {
             Write-Output "  Frame rate: $frameRate, width of $imageWidth"
             Write-Output "  Converting to .MP4..."
             C:\ml\python-3.8\python.exe $SlowMotionConversionPath\scripts\HEVC-to-MP4.py $file
