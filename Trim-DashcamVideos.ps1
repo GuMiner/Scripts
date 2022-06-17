@@ -50,6 +50,12 @@ if ($endParts.Length -gt 1) {
 }
 
 $difference = ($endMinutes*60 + $endSeconds) - ($startMinutes*60 + $startSeconds)
+$differenceMinutes = 0
+while ($difference -gt 60)
+{
+	$difference = $difference - 60
+	$differenceMinutes = $differenceMinutes + 1
+}
 
 $outputFilename = "$([IO.Path]::GetDirectoryName($file))\$([IO.Path]::GetFileNameWithoutExtension($file))-cut.mp4"
-& $FFmpegPath -ss 00:0$($startMinutes):$startSeconds -i $File -to 00:00:$difference -pix_fmt yuv420p $outputFilename
+& $FFmpegPath -ss 00:0$($startMinutes):$startSeconds -i $File -to 00:0$($differenceMinutes):$difference -pix_fmt yuv420p -an $outputFilename
