@@ -51,7 +51,7 @@ if ($endParts.Length -gt 1) {
 
 $difference = ($endMinutes*60 + $endSeconds) - ($startMinutes*60 + $startSeconds)
 $differenceMinutes = 0
-while ($difference -gt 60)
+while ($difference -ge 60)
 {
 	$difference = $difference - 60
 	$differenceMinutes = $differenceMinutes + 1

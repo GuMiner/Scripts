@@ -15,7 +15,7 @@ The folder with the drag-and-drop slow motion scripting.
 .PARAMETER DeleteMovFile
 Whether to default the *.MOV HEVC file (and 240 FPS MP4 file) after conversion. Defaults to $true.
 #>
-$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2022\05"
+$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2022\07"
 
 $ExifToolPath = "C:\Users\gusgr\Desktop\Programs\exiftool\exiftool.exe"
 

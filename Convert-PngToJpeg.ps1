@@ -1,7 +1,6 @@
-<#
+﻿<#
 .DESCRIPTION
-Runs jpeg-recompress (https://github.com/danielgtaylor/jpeg-archive) on a folder of JPEG files.
-Converts HEIC files to JPG too, as that saves ~1 MB per file.
+Converts huge PNG files to reasonable JPG files.
 
 .PARAMETER Folder
 The folder with files to process
@@ -10,24 +9,19 @@ The folder with files to process
 The path to 'jpeg-recompress.exe' to run to recompress files.
 
 .PARAMETER ImageMagickPath
-The path to 'magick.exe' to convert HEIC files to JPG files.
+The path to 'magick.exe' to convert PNG files to JPG files.
 #>
-$Folder = "C:\Users\gusgr\OneDrive\Pictures\Camera Roll\2022\08"
+$Folder = "C:\Users\gusgr\Desktop\2022 OpenAI DALL-E 2"
 
 $JpegRecompressPath = "C:\Users\gusgr\Desktop\Programs\jpeg-archive\jpeg-recompress.exe"
 
 $ImageMagickPath = "C:\Users\gusgr\Desktop\Programs\ImageMagick\magick.exe"
 
-$DeleteHeicFile = $true
+$DeletePngFile = $true
 
 foreach ($file in [IO.Directory]::GetFiles($Folder))
 {
-    if ($file.EndsWith("jpg", [StringComparison]::OrdinalIgnoreCase))
-    {
-        Write-Output "Processing $file ..."
-        & $JpegRecompressPath -q high $file $file
-    }
-    elseif ($file.EndsWith("heic", [StringComparison]::OrdinalIgnoreCase))
+    if ($file.EndsWith("png", [StringComparison]::OrdinalIgnoreCase))
     {
         $jpgFilename = "$([IO.Path]::GetDirectoryName($file))\$([IO.Path]::GetFileNameWithoutExtension($file)).jpg"
 
@@ -38,7 +32,7 @@ foreach ($file in [IO.Directory]::GetFiles($Folder))
         & $JpegRecompressPath -q high $jpgFilename $jpgFilename
 
         Write-Output "Size Difference: $((100*(Get-Item $jpgFilename).length)/((Get-Item $file).length))%"
-        if ($DeleteHeicFile) {
+        if ($DeletePngFile) {
             [IO.File]::Delete($file)
         }
     }
