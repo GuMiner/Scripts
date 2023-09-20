@@ -1,9 +1,12 @@
 ﻿$fileList = @{
-'GRMS0024.MP4' = @{ 'start' = '50'; 'end' = '1.50'};
-'GRMS0026.MP4' = @{ 'start' = '5'; 'end' = '1.15'};
+'GRMS0013.MP4' = @{ 'start' = '0.56'; 'end' = '1.12'};
+'GRMS0012.MP4' = @{ 'start' = '0.00'; 'end' = '1.00'};
+'GRMS0011.MP4' = @{ 'start' = '0.13'; 'end' = '1.00'};
+'GRMS0009.MP4' = @{ 'start' = '1.44'; 'end' = '1.59'};
+'GRMS0004.MP4' = @{ 'start' = '1.05'; 'end' = '1.32'};
 }
 
-$folder = "E:\Dashcam\6-11 dashcam"
+$folder = "E:\Dashcam\6-24-23"
 
 foreach ($file in $fileList.Keys)
 {

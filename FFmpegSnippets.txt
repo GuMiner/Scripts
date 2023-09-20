@@ -44,3 +44,9 @@ ffmpeg -i "input.mp4" -vf "eq=brightness=0:contrast=1:saturation=1,curves=red='0
 
 # Combine images into a 29 FPS video
 ffmpeg -start_number 4701 -i DSC0%d.JPG -r 30 -s 1920x1080 out.mp4
+
+## Run at 29 FPS without dropping frames
+ffmpeg -start_number 1 -i %d.jpg -r 30 -s 1920x1080 -filter "setpts=8*PTS" out.mp4
+
+## Align images via Hugin for video combiation
+"C:\Program Files\Hugin\bin\align_image_stack.exe" -a a_ image1 image2 ... imageN
