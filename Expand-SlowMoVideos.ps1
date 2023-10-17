@@ -15,19 +15,42 @@ The folder with the drag-and-drop slow motion scripting.
 .PARAMETER DeleteMovFile
 Whether to default the *.MOV HEVC file (and 240 FPS MP4 file) after conversion. Defaults to $true.
 #>
-$Folder = "C:\Users\gusgr\Desktop\2023 Fence"
+$Folder = "C:\Users\gusgr\Desktop\toprocess\walkthroughs"
 
 $ExifToolPath = "C:\Users\gusgr\Desktop\Programs\exiftool\exiftool.exe"
 
 $SlowMotionConversionPath = "C:\Users\gusgr\Desktop\Active\Scripts\SlowMotionVideo"
 
 $DeleteMovFile = $true
+$DeleteHEVCFile = $true
 
-foreach ($file in [IO.Directory]::GetFiles($Folder))
-{
-    if ($file.EndsWith("MOV", [StringComparison]::OrdinalIgnoreCase))
-    {
-        Write-Output "Processing $file ..."
+foreach ($file in [IO.Directory]::GetFiles($Folder)) {
+    if ($file.EndsWith("MP4", [StringComparison]::OrdinalIgnoreCase)) {
+        Write-Output "Checking MP4 $file ..."
+
+        # Figure out if the current EXIF information indicates this needs to be converted to the more standard formats
+        $fileData = & $ExifToolPath $file
+        # Write-Output $fileData
+        
+        $imageWidth = [int]::Parse($($fileData | Select-String -Pattern "Source Image Width").ToString().Split(':')[1].Trim())
+        $imageHeight = [int]::Parse($($fileData | Select-String -Pattern "Source Image Height").ToString().Split(':')[1].Trim())
+        $frameRate = [int]::Parse($($fileData | Select-String -Pattern "Video Frame Rate").ToString().Split(':')[1].Trim().Split('.')[0])
+        $videoFormat = ($fileData | Select-String -Pattern "Compressor ID").ToString().Split(':')[1].Trim()
+        Write-Output "  $imageWidth x $imageHeight @ $frameRate ($videoFormat)"
+
+
+        # 1920x1080 30 FPS HEVC -> 1920x1080 30 FPS AVC
+        if ($imageWidth -eq 1920 -and $imageHeight -eq 1080 -and ($frameRate -eq 30 -or $frameRate -eq 29) -and $videoFormat -eq "hvc1") {
+            Write-Output "  Converting HEVC to AVC..."
+            C:\ml\python-3.8\python.exe $SlowMotionConversionPath\scripts\convert-to-yuv420p.py $file
+            if ($DeleteHEVCFile) {
+                Write-Output "  Deleting HEVC..."
+                [IO.File]::Delete($file)
+            }
+        }
+    }
+    elseif ($file.EndsWith("MOV", [StringComparison]::OrdinalIgnoreCase)) {
+        Write-Output "Processing MOV $file ..."
         $fileData = & $ExifToolPath $file
 
         $frameRate = [float]::Parse($($fileData | Select-String -Pattern "Video Frame Rate").ToString().Split(':')[1].Trim())
