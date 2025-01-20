@@ -1,6 +1,12 @@
 Useful FFMpeg snippets from here and there
 ------------------------------------------
 
+# Output HEVC, high quality, with surround sound
+\ffmpeg.exe -i ... -channel_layout 5.1 -c:v libx265 -vcodec hevc_nvenc output.mp4
+
+# Convert video to put eventually on a DVD
+ffmpeg.exe -i input.mp4 -target ntsc-dvd output.mpg
+
 # Nicely convert 5.1 surround sound to stereo
 ffmpeg -i ... -ac 2 -af "pan=stereo|FL=FC+0.30*FL+0.30*BL|FR=FC+0.30*FR+0.30*BR" -preset faster output.mp4
 
@@ -10,6 +16,9 @@ ffmpeg -i ... -vn -b:a 384k output.ogg
 # (batch) Bulk convert AVI / MOV files that get compressed down too much with default settings
 FOR /f %%a IN ('dir /b *.AVI') DO CALL ffmpeg -i %%a -b:a 48k -b:v 20000k -pix_fmt yuv420p %%~na.mp4
 FOR /f %%a IN ('dir /b *.MOV') DO CALL ffmpeg -i %%a -b:a 48k -b:v 20000k %%~na.mpeg
+
+# Convert MPEG with 5.1 in good quality to MP4
+ffmpeg.exe -i input.mpg -channel_layout 5.1 -pix_fmt yuv420p -crf 18 -preset slow output.mp4
 
 # (powershell) Bulk convert AVI files using default MP4 settings
 $dir = "..."
